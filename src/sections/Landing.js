@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
+import styled from 'styled-components';
 import { Heading, Flex, Box, Text } from 'rebass/styled-components';
 import TextLoop from 'react-text-loop';
 import { SectionLink } from 'react-scroll-section';
@@ -7,32 +8,51 @@ import Section from '../components/Section';
 import SocialLink from '../components/SocialLink';
 import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
+import colors from '../../colors';
 
-const Background = () => (
+const ImageBackground = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2;
+
+  ${(props) => {
+    return `background: url(${props.image}) center center/cover no-repeat fixed`;
+  }}
+`;
+
+const Background = (image) => () => (
   <div>
+    <ImageBackground image={image} />
     <Triangle
-      color="backgroundDark"
+      color={colors.backgroundDark}
+      opacity="aa"
       height={['35vh', '80vh']}
       width={['95vw', '60vw']}
     />
 
     <Triangle
-      color="secondary"
+      color={colors.secondary}
+      opacity="aa"
       height={['38vh', '80vh']}
       width={['50vw', '35vw']}
     />
 
     <Triangle
-      color="primaryDark"
+      color={colors.primaryDark}
+      opacity="aa"
       height={['25vh', '35vh']}
-      width={['75vw', '60vw']}
+      width={['100vw', '100vw']}
       invertX
     />
 
     <Triangle
-      color="backgroundDark"
-      height={['20vh', '20vh']}
-      width={['100vw', '100vw']}
+      color={colors.backgroundDark}
+      opacity="aa"
+      height={['15vh', '20vh']}
+      width={['110vw', '100vw']}
       invertX
       invertY
     />
@@ -42,32 +62,49 @@ const Background = () => (
 const centerHorizontally = { marginRight: 'auto', marginLeft: 'auto' };
 
 const LandingPage = () => (
-  <Section.Container id="home" Background={Background}>
-    <StaticQuery
-      query={graphql`
-        query SiteTitleQuery {
-          contentfulAbout {
+  <StaticQuery
+    query={graphql`
+      query SiteTitleQuery {
+        contentfulAbout {
+          name
+          roles
+          socialLinks {
+            id
+            url
             name
-            roles
-            socialLinks {
-              id
-              url
-              name
-              fontAwesomeIcon
-            }
+            fontAwesomeIcon
           }
-          site {
-            siteMetadata {
-              deterministicBehaviour
+          profile {
+            title
+            image: resize(width: 450, quality: 100) {
+              src
             }
           }
         }
-      `}
-      render={({ contentfulAbout, site }) => {
-        const { name, socialLinks, roles } = contentfulAbout;
-        const { deterministicBehaviour } = site.siteMetadata;
-
-        return (
+        contentfulSection {
+          background {
+            resize(width: 1080, quality: 100) {
+              src
+            }
+          }
+        }
+        site {
+          siteMetadata {
+            deterministicBehaviour
+          }
+        }
+      }
+    `}
+    render={({ contentfulAbout, contentfulSection, site }) => {
+      const { name, socialLinks, roles } = contentfulAbout;
+      const { background } = contentfulSection;
+      const { deterministicBehaviour } = site.siteMetadata;
+      console.log(background);
+      return (
+        <Section.Container
+          id="home"
+          Background={Background(background.resize.src)}
+        >
           <Fragment>
             <Heading
               textAlign="center"
@@ -109,10 +146,10 @@ const LandingPage = () => (
               {({ onClick }) => <MouseIcon onClick={onClick} />}
             </SectionLink>
           </Fragment>
-        );
-      }}
-    />
-  </Section.Container>
+        </Section.Container>
+      );
+    }}
+  />
 );
 
 export default LandingPage;

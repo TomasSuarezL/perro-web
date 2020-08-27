@@ -42,29 +42,29 @@ const ProfilePicture = styled(Image)`
 `;
 
 const About = () => (
-  <Section.Container id="about" Background={Background}>
-    <Section.Header name="About me" icon="🙋‍♂️" label="person" />
-    <StaticQuery
-      query={graphql`
-        query AboutMeQuery {
-          contentfulAbout {
-            aboutMe {
-              childMarkdownRemark {
-                rawMarkdownBody
-              }
+  <StaticQuery
+    query={graphql`
+      query AboutMeQuery {
+        contentfulAbout {
+          aboutMe {
+            childMarkdownRemark {
+              rawMarkdownBody
             }
-            profile {
-              title
-              image: resize(width: 450, quality: 100) {
-                src
-              }
+          }
+          profile {
+            title
+            image: resize(width: 450, quality: 100) {
+              src
             }
           }
         }
-      `}
-      render={(data) => {
-        const { aboutMe, profile } = data.contentfulAbout;
-        return (
+      }
+    `}
+    render={(data) => {
+      const { aboutMe, profile } = data.contentfulAbout;
+      return (
+        <Section.Container id="about" Background={Background}>
+          <Section.Header name="About me" icon="🙋‍♂️" label="person" />
           <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
             <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
               <Fade bottom>
@@ -89,10 +89,10 @@ const About = () => (
               </Fade>
             </Box>
           </Flex>
-        );
-      }}
-    />
-  </Section.Container>
+        </Section.Container>
+      );
+    }}
+  />
 );
 
 export default About;

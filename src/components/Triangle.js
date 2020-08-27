@@ -7,8 +7,7 @@ const Triangle = styled.div`
   z-index: -2;
 
   ${(props) => {
-    const color = props.theme.colors[props.color] || props.color;
-    const border = `${props.height[0]} solid ${color};`;
+    const border = `${props.height[0]} solid ${props.color}${props.opacity};`;
     return props.invertY
       ? `border-bottom: ${border}; bottom: 0;`
       : `border-top: ${border};`;
