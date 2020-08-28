@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'gatsby';
 import Headroom from 'react-headroom';
 import { Flex, Image } from 'rebass/styled-components';
 import styled from 'styled-components';
@@ -48,32 +49,29 @@ const Header = () => (
     >
       <SectionLinks>
         {({ allLinks }) => {
-          const { home, links } = formatLinks(allLinks);
+          const routes = ['Tecnica', 'Uncion', 'Sabiduria', 'Amor', 'Mistica'];
 
-          const homeLink = home && (
-            <Image
-              src={Logo}
-              width="50px"
-              alt="Portfolio Logo"
-              onClick={home.onClick}
-              style={{
-                cursor: 'pointer',
-              }}
-            />
+          const homeLink = (
+            <Link to="/">
+              <Image
+                src={Logo}
+                width="50px"
+                alt="Portfolio Logo"
+                style={{
+                  cursor: 'pointer',
+                }}
+              />
+            </Link>
           );
-          const navLinks = links.map(({ name, value }) => (
-            <RouteLink
-              key={name}
-              onClick={value.onClick}
-              selected={value.isSelected}
-              name={name}
-            />
+
+          const navLinks = routes.map((name) => (
+            <RouteLink key={name} name={name} />
           ));
 
           return (
             <Fragment>
               {homeLink}
-              <Flex mr={[0, 3, 5]}>{navLinks}</Flex>
+              <Flex mr={[0, 3, 5, 7, 9]}>{navLinks}</Flex>
             </Fragment>
           );
         }}

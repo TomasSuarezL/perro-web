@@ -9,6 +9,7 @@ import Section from '../components/Section';
 import { CardContainer, Card } from '../components/Card';
 import Triangle from '../components/Triangle';
 import ImageSubtitle from '../components/ImageSubtitle';
+import colors from '../../colors';
 
 const MEDIUM_CDN = 'https://cdn-images-1.medium.com/max/400';
 const MEDIUM_URL = 'https://medium.com';
@@ -16,21 +17,24 @@ const MEDIUM_URL = 'https://medium.com';
 const Background = () => (
   <div>
     <Triangle
-      color="backgroundDark"
+      color={colors.backgroundDark}
+      opacity="aa"
       height={['15vh', '10vh']}
       width={['100vw', '100vw']}
       invertX
     />
 
     <Triangle
-      color="secondary"
+      color={colors.secondary}
+      opacity="aa"
       height={['50vh', '40vh']}
       width={['70vw', '40vw']}
       invertY
     />
 
     <Triangle
-      color="primaryDark"
+      color={colors.primaryDark}
+      opacity="aa"
       height={['40vh', '15vh']}
       width={['100vw', '100vw']}
       invertX

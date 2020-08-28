@@ -1,19 +1,25 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { Box } from 'rebass/styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import LinkAnimated from './LinkAnimated';
+import colors from '../../colors';
 
-const RouteLink = ({ onClick, selected, name }) => (
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.primaryLight};
+`;
+
+const RouteLink = ({ name }) => (
   <Box ml={[2, 3]} color="background" fontSize={[2, 3]}>
-    <LinkAnimated onClick={onClick} selected={selected} tabIndex={0}>
-      {name}
+    <LinkAnimated tabIndex={0}>
+      <StyledLink to={`/${name}/`}>{name}</StyledLink>
     </LinkAnimated>
   </Box>
 );
 
 RouteLink.propTypes = {
-  onClick: PropTypes.func,
-  selected: PropTypes.bool,
   name: PropTypes.string,
 };
 

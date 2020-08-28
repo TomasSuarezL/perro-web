@@ -10,25 +10,29 @@ import SocialLink from '../components/SocialLink';
 import Triangle from '../components/Triangle';
 import ImageSubtitle from '../components/ImageSubtitle';
 import Hide from '../components/Hide';
+import colors from '../../colors';
 
 const Background = () => (
   <div>
     <Triangle
-      color="secondaryLight"
+      color={colors.secondaryLight}
+      opacity="aa"
       height={['80vh', '80vh']}
       width={['100vw', '100vw']}
       invertX
     />
 
     <Triangle
-      color="background"
+      color={colors.background}
+      opacity="aa"
       height={['50vh', '20vh']}
       width={['50vw', '50vw']}
       invertX
     />
 
     <Triangle
-      color="primaryDark"
+      color={colors.primaryDark}
+      opacity="aa"
       height={['25vh', '40vh']}
       width={['75vw', '60vw']}
       invertX
@@ -36,7 +40,8 @@ const Background = () => (
     />
 
     <Triangle
-      color="backgroundDark"
+      color={colors.backgroundDark}
+      opacity="aa"
       height={['25vh', '20vh']}
       width={['100vw', '100vw']}
       invertY

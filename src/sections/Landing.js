@@ -17,6 +17,8 @@ const ImageBackground = styled.div`
   top: 0;
   left: 0;
   z-index: -2;
+  opacity: 0.5;
+  filter: grayscale(80%);
 
   ${(props) => {
     return `background: url(${props.image}) center center/cover no-repeat fixed`;
@@ -42,9 +44,9 @@ const Background = (image) => () => (
 
     <Triangle
       color={colors.primaryDark}
-      opacity="aa"
-      height={['25vh', '35vh']}
-      width={['100vw', '100vw']}
+      opacity="44"
+      height={['165vh', '165vh']}
+      width={['90vw', '90vw']}
       invertX
     />
 
@@ -99,21 +101,21 @@ const LandingPage = () => (
       const { name, socialLinks, roles } = contentfulAbout;
       const { background } = contentfulSection;
       const { deterministicBehaviour } = site.siteMetadata;
-      console.log(background);
       return (
         <Section.Container
           id="home"
           Background={Background(background.resize.src)}
+          style={{ backgroundColor: 'black', zIndex: -2 }}
         >
           <Fragment>
             <Heading
               textAlign="center"
               as="h1"
               color="primary"
-              fontSize={[6, 7]}
+              fontSize={[6, 7, 8]}
               mb={[3, 4, 5]}
             >
-              {`Hello, I'm ${name}!`}
+              {`${name}`}
             </Heading>
 
             <Heading
